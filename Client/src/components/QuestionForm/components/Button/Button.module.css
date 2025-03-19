@@ -1,0 +1,10 @@
+.button {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  transition: background-color 0.2s linear;
+}
+
+.button:hover {
+  background-color:  #A1A1A1;
+  transition: background-color 0.2s linear;
+}

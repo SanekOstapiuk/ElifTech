@@ -1,0 +1,24 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.create-quiz {
+    max-width: 300px;
+    width: 100%;
+    background-color: #EFEFEF;
+    transition: background-color 0.2s linear;
+    padding: 10px 15px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+}
+
+.create-quiz:hover {
+    background-color:  #A1A1A1;
+    transition: background-color 0.2s linear;
+    color: inherit;
+}
