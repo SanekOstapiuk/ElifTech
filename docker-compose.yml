@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+  client:
+    build: ./Client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Client:/app  # Mount local code
+      - /app/node_modules  # Prevent overwriting node_modules
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

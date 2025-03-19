@@ -23,7 +23,7 @@ export default function EditPage() {
 
   return (
     <div>
-      <QuestionForm currPath={path} quizId={quizId} />
+      <QuestionForm currPath={path} />
     </div>
   )
 }
