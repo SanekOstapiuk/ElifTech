@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { TypeQuizData } from '../../types/quizTypes'
 import QuizForm from '../../components/QuizForm'
+import { API_URL } from '../../constants/apiConfig'
 
 export default function EditPage() {
   const { quizId } = useParams()
@@ -12,7 +13,7 @@ export default function EditPage() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/getQuiz/${quizId}`)
+      const response = await axios.get(`${API_URL}/api/getQuiz/${quizId}`)
       setData(response.data)
     } catch (error) {
       console.error(error)

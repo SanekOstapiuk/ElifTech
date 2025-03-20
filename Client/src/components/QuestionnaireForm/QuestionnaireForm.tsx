@@ -6,6 +6,7 @@ import axios from 'axios';
 import Container from '../Container';
 import Form, { Button, InputByType } from '../Form';
 import { TypeQuestion } from '../../types/quizTypes'
+import { API_URL } from '../../constants/apiConfig'
 
 import styles from './QuestionnaireForm.module.css'
 
@@ -74,7 +75,7 @@ const QuestionnaireForm: React.FC<TypeQuestionnaireForm> = function ({questions,
         answers: item?.answer,
       }))
       const time = `${timeElapsed} sec`
-      const response = await axios.post(`http://localhost:3001/api/addAnswers/${quizId}`, {answers, time})
+      const response = await axios.post(`${API_URL}/api/addAnswers/${quizId}`, {answers, time})
       alert(response.data.message);
       navigate('/')
     } catch (error) {

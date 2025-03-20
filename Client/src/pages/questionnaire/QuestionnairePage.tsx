@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import QuestionnaireForm from '../../components/QuestionnaireForm';
 import Container from '../../components/Container';
 import { TypeQuizData } from '../../types/quizTypes'
+import { API_URL } from '../../constants/apiConfig'
 
 import styles from './QuestionnairePage.module.css'
 
@@ -17,7 +18,7 @@ export default function QuestionnairePage() {
 
   const fetchData = async () => {
     try {
-      const resp = await axios.get(`http://localhost:3001/api/getQuiz/${quizId}`)
+      const resp = await axios.get(`${API_URL}/api/getQuiz/${quizId}`)
       setData(resp.data)
     } catch (error) {
       console.error(error)

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './QuizBlock.module.css'
 import QuizCard from '../QuizCard';
+import { API_URL } from '../../constants/apiConfig'
 
 const cx = classNames.bind(styles)
 
@@ -23,7 +24,7 @@ const QuizBlock: React.FC = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response: AxiosResponse<TypeQuiz[]> = await axios.get('http://localhost:3001/api/quizzes');
+        const response: AxiosResponse<TypeQuiz[]> = await axios.get(`${API_URL}/api/quizzes`);
         setData(response.data)
       } catch (error) {
         console.error('Error fetching quizzes:', error);
@@ -35,7 +36,7 @@ const QuizBlock: React.FC = () => {
 
   const deleteQuiz = async (quizId: string) => {
     try {
-      await axios.delete(`http://localhost:3001/api/removeQuiz/${quizId}`);
+      await axios.delete(`${API_URL}/api/removeQuiz/${quizId}`);
       setData(prev => prev ? prev.filter(quiz => quiz._id !== quizId) : null);
     } catch (error) {
       console.error('Error deleting quiz:', error);

@@ -6,6 +6,7 @@ import axios from 'axios';
 import Container from "../Container";
 import Form, {Button, InputByType, Select} from '../Form';
 import { TypeQuizData, TypeQuestion } from '../../types/quizTypes'
+import { API_URL } from '../../constants/apiConfig'
 
 import styles from './QuizForm.module.css'
 
@@ -111,7 +112,7 @@ const QuizForm: React.FC<TypeQuestionForm> = ({currPath, data}) => {
     e.preventDefault()
     try {
       const data = {...quizData, questionsCount: questions.length, questions}
-      const response = await axios.post(`http://localhost:3001/api/${currPath}`, {data})
+      const response = await axios.post(`${API_URL}/api/${currPath}`, {data})
       alert(response.data.message);
       navigate('/')
     } catch (error) {
