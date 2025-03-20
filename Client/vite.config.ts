@@ -11,5 +11,6 @@ export default defineConfig({
     watch: {
       usePolling: true, // Enable polling to detect file changes
     },
+    allowedHosts: ['eliftech-client.onrender.com'],
   },
 })
