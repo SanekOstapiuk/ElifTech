@@ -1,3 +1,3 @@
-import QuizCard from "./QuizCard.js";
+import QuizCard from './QuizCard';
 
 export default QuizCard

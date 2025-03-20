@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import classNames from "classnames/bind"
+import classNames from 'classnames/bind'
 
 import styles from "./Container.module.css";
 

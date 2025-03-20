@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
-import classNames from "classnames/bind";
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import styles from './QuizBlock.module.css'
-import QuizCard from "../QuizCard";
-import { Link } from "react-router-dom";
+import QuizCard from '../QuizCard';
 
 const cx = classNames.bind(styles)
 
@@ -12,6 +12,7 @@ type TypeQuiz = {
   quizName: string;
   quizDesc: string;
   questionsCount: number;
+  runningCount: number;
   quizId: number;
   _id: string
 }
@@ -25,7 +26,7 @@ const QuizBlock: React.FC = () => {
         const response: AxiosResponse<TypeQuiz[]> = await axios.get('http://localhost:3001/api/quizzes');
         setData(response.data)
       } catch (error) {
-        console.error("Error fetching quizzes:", error);
+        console.error('Error fetching quizzes:', error);
       }
     };
 
@@ -53,6 +54,7 @@ const QuizBlock: React.FC = () => {
               desc={quiz.quizDesc}
               quizId={quiz._id}
               count={quiz.questionsCount}
+              runCount={quiz.runningCount}
               onDelete={deleteQuiz}
             />
           ))}

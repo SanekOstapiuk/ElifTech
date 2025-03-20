@@ -1,9 +1,9 @@
-import QuestionForm from '../../components/QuestionForm'
+import QuizForm from '../../components/QuizForm'
 
 export default function BuilderPage() {
   return (
     <div>
-      <QuestionForm currPath='addQuiz' />
+      <QuizForm currPath='addQuiz' />
     </div>
   )
 }

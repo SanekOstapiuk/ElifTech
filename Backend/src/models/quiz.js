@@ -16,6 +16,7 @@ const quizSchema = new Schema({
     quizName: { type: String, required: true },
     quizDesc: { type: String, required: true },
     questionsCount: { type: String, required: true, default: 0 },
+    runningCount: { type: Number, required: true, default: 0 },
     questions: {type: [questionSchema], required: false }
 });
 

@@ -1,0 +1,12 @@
+.root {
+	display: block;
+}
+
+.label {
+	display: block;
+	font-size: 15px;
+}
+
+.label:not(:last-child) {
+	margin-bottom: 10px;
+}

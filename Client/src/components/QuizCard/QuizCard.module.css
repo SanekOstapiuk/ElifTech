@@ -1,5 +1,18 @@
 .card {
-    position: relative;
-    border: 1px solid black;
-    padding: 20px;
+  position: relative;
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.name {
+  margin-bottom: 5px;
+}
+
+.desc {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.count {
+  font-size: 14px;
 }

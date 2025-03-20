@@ -1,41 +1,24 @@
-import React, {FormEvent, useState} from 'react';
-import classNames from "classnames/bind";
-import { useNavigate } from "react-router-dom";
+import React, {FormEvent, useEffect, useState} from 'react';
+import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Container from "../Container";
-import Button from "./components/Button";
-import Input from "./components/Input";
-import Select from "./components/Select";
+import Form, {Button, InputByType, Select} from '../Form';
+import { TypeQuizData, TypeQuestion } from '../../types/quizTypes'
 
-import styles from './QuestionForm.module.css'
-import axios from "axios";
+import styles from './QuizForm.module.css'
 
 const cx = classNames.bind(styles)
 
-type TypeQuizData = {
-  quizName: string;
-  quizDesc: string
-}
-
-type TypeQuestion = {
-  id: number;
-  question: string;
-  type: 'text' | 'single choice' | 'multiple choice';
-  choices: TypeChoice[];
-}
-
-type TypeChoice = {
-  choice: string,
-  id: number
-}
-
 type TypeQuestionForm = {
-  currPath: string
+  currPath: string,
+  data?: TypeQuizData | null
 }
 
-const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
+const QuizForm: React.FC<TypeQuestionForm> = ({currPath, data}) => {
   const navigate = useNavigate()
-  const [quizData, setQuizData] = useState<TypeQuizData>({
+  const [quizData, setQuizData] = useState<{quizName: string, quizDesc: string}>({
     quizName: '',
     quizDesc: ''
   })
@@ -49,6 +32,17 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
     }
   ])
 
+  useEffect(() => {
+    if(data) {
+      setQuizData({
+        quizName: data.quizName || "",
+        quizDesc: data.quizDesc || "",
+      });
+
+      setQuestions(data.questions || []);
+    }
+  }, [data])
+
   const updateQuizData = (value: string, type: 'quizName' | 'quizDesc') => {
     setQuizData(prev => ({...prev, [type]: value}))
   }
@@ -56,7 +50,7 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
   const addQuestion = () => {
     setQuestions(prev => [
       ...prev,
-      { id: Date.now(), question: "", type: "text", choices: [] }
+      { id: Date.now(), question: "", type: 'text', choices: [] }
     ]);
   };
 
@@ -64,7 +58,7 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
     setQuestions(prev => prev.map(question => question.id === id ? { ...question, question: value } : question));
   };
 
-  const changeTypeQuestion = (id: number, value: TypeQuestion["type"]) => {
+  const changeTypeQuestion = (id: number, value: TypeQuestion['type']) => {
     if(value === 'text') {
       setQuestions(prev => prev.map(question => question.id === id
         ? {
@@ -121,26 +115,26 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
       alert(response.data.message);
       navigate('/')
     } catch (error) {
-      console.error("Error...", error)
+      console.error('Error...', error)
     }
   }
 
   return (
     <Container>
-      <form onSubmit={handleSubmit}>
-        <Input
+      <Form onSubmit={handleSubmit}>
+        <InputByType
           label='Quiz name'
           value={quizData.quizName}
           onChange={(e) => updateQuizData(e.target.value, 'quizName')}
         />
-        <Input
+        <InputByType
           label='Quiz description'
           value={quizData.quizDesc}
           onChange={(e) => updateQuizData(e.target.value, 'quizDesc')}
         />
         {questions.map((question, questIndex) => (
           <div key={question.id}>
-            <Input
+            <InputByType
               label={`${questIndex + 1}. Question`}
               value={question.question}
               onChange={(e) => updateQuestion(question.id, e.target.value)}
@@ -148,16 +142,17 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
             <Select
               value={question.type}
               onChange={(e) => changeTypeQuestion(question.id, e.target.value as TypeQuestion["type"])}
-              options={['text', 'single choice', 'multiple choice']}
+              options={['text', 'single-choice', 'multiple-choice']}
             />
             <Button onClick={() => deleteQuestion(question.id)} name='Remove' />
             {question.type !== "text" && (
               <div className={cx('choice-container')}>
                 {question.choices.map((choice, choiceIndex) => (
                   <div key={choice.id}>
-                    <Input
+                    <InputByType
                       label={`${choiceIndex + 1}. Choice`}
                       value={choice.choice}
+                      autoFocus={true}
                       onChange={(e) => updateChoice(question.id, choice.id, e.target.value)}
                     />
                     <Button onClick={() => deleteChoice(question.id, choice.id)} name='Remove' />
@@ -169,10 +164,10 @@ const QuestionForm: React.FC<TypeQuestionForm> = ({currPath}) => {
           </div>
         ))}
         <Button onClick={addQuestion} name='Add question' />
-        <Button type='submit' name='Save Quiz' />
-      </form>
+        <Button className={cx('save-btn')} type='submit' name='Save Quiz' />
+      </Form>
     </Container>
   );
 }
 
-export default QuestionForm
+export default QuizForm

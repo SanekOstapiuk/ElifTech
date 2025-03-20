@@ -1,3 +1,3 @@
-import QuizBlock from "./QuizBlock.js";
+import QuizBlock from './QuizBlock';
 
 export default QuizBlock

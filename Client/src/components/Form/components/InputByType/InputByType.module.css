@@ -1,0 +1,15 @@
+.wrapper {
+	margin-right: 20px;
+}
+
+.input {
+	max-width: 400px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.label {
+	display: block;
+	font-size: 16px;
+	margin-bottom: 5px;
+}

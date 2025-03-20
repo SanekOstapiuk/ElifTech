@@ -1,0 +1,8 @@
+.root {
+	display: block;
+}
+
+.save-button {
+	max-width: 200px;
+	width: 100%;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import DropDown from '../DropDown'
@@ -27,9 +27,9 @@ const MoreOptions: React.FC<TypeMoreOptions> = ({quizId, onDelete}) => {
       </button>
       {showActionButtons &&
         <DropDown className={cx('action-buttons')} onClose={() => setShowActionButtons(false)}>
-            <Link to={`/edit/${quizId}`}>Edit</Link>
-            <Link to={`/questionnaire/${quizId}`}>Run</Link>
-            <button className={cx('button-delete')} onClick={deleteQuiz} type='button'>Delete</button>
+            <Link className={cx('link')} to={`/edit/${quizId}`}>Edit</Link>
+            <Link className={cx('link')} to={`/questionnaire/${quizId}`}>Run</Link>
+            <button className={cx('button-delete', 'link')} onClick={deleteQuiz} type='button'>Delete</button>
         </DropDown>
       }
     </div>

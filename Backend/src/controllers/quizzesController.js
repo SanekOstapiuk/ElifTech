@@ -1,9 +1,10 @@
 import {
     getAllQuizzes,
     removeQuizById,
-    updateQuestions,
+    updateQuizById,
     addNewQuiz,
-    getQuizById
+    getQuizById,
+    addNewAnswers
 } from '../services/quizzesService.js';
 
 export const getQuizzes = async (req, res) => {
@@ -39,13 +40,26 @@ export const addQuiz = async (req, res) => {
     }
 };
 
+export const addAnswers = async (req, res) => {
+    try {
+        const { answers, time } = req.body
+        const { quizId } = req.params
+        const result = await addNewAnswers(answers, time, quizId)
+
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(500).json({ message: "Server error"})
+    }
+};
+
+
 export const updateQuiz = async (req, res) => {
     try {
         const { quizId } = req.params
         const { data } = req.body
-        // const updateQuiz = await updateQuestions(quizId, data)
-        console.log(data)
-        // res.status(200).json({ message: 'Your quiz was successfully updated.'})
+        const updateQuiz = await updateQuizById(quizId, data)
+
+        res.status(200).json({ message: 'Your quiz was successfully updated.'})
     } catch (error) {
         res.status(500).json({ message: "Server error"})
     }

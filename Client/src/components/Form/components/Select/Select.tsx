@@ -18,7 +18,7 @@ const Select: React.FC<TypeSelect> = ({value, onChange, options}) => {
       onChange={onChange}
       className={cx('select')}
     >
-      {options.map((option) => (
+      {options?.map((option) => (
         <option key={option} value={option}>{option}</option>
       ))}
     </select>

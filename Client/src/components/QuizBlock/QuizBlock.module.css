@@ -7,7 +7,7 @@
 }
 
 .create-quiz {
-    max-width: 300px;
+    max-width: 400px;
     width: 100%;
     background-color: #EFEFEF;
     transition: background-color 0.2s linear;

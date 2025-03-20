@@ -11,7 +11,7 @@ export default function AppRoutes() {
       <Route index element={<Navigate to="/catalog" />} />
       <Route path="catalog" element={<CatalogPage />} />
       <Route path="builder" element={<BuilderPage />} />
-      <Route path="questionaire/:quizId" element={<QuestionnairePage />} />
+      <Route path="questionnaire/:quizId" element={<QuestionnairePage />} />
       <Route path="edit/:quizId" element={<EditPage />} />
   </Routes>
   );
