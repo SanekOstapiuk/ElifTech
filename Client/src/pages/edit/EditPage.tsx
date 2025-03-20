@@ -24,9 +24,9 @@ export default function EditPage() {
     fetchData()
   }, [])
 
-  return (
+  return data ? (
     <div>
       <QuizForm currPath={path} data={data}/>
     </div>
-  )
+  ) : (<p>Loading...</p>);
 }

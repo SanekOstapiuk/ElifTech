@@ -44,26 +44,24 @@ const QuizBlock: React.FC = () => {
     }
   }
 
-  return (
+  return data ? (
     <>
-      {data &&
-        <div className={cx('wrapper')}>
-          {data.map((quiz) => (
-            <QuizCard
-              key={quiz._id}
-              name={quiz.quizName}
-              desc={quiz.quizDesc}
-              quizId={quiz._id}
-              count={quiz.questionsCount}
-              runCount={quiz.runningCount}
-              onDelete={deleteQuiz}
-            />
-          ))}
-        </div>
-      }
+      <div className={cx('wrapper')}>
+        {data.map((quiz) => (
+          <QuizCard
+            key={quiz._id}
+            name={quiz.quizName}
+            desc={quiz.quizDesc}
+            quizId={quiz._id}
+            count={quiz.questionsCount}
+            runCount={quiz.runningCount}
+            onDelete={deleteQuiz}
+          />
+        ))}
+      </div>
       <Link to='/builder' className={cx('create-quiz')}>Create new quiz</Link>
     </>
-  )
+  ) : (<p>Loading...</p>);
 }
 
 export default QuizBlock
